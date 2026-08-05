@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "wix-mcp": {
+      "url": "https://mcp.wix.com/mcp",
+      "type": "http"
+    }
+  },
+  "inputs": []
+}
