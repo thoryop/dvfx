@@ -1,0 +1,15 @@
+# Netlify configuration for DVFX (Next.js 16 via @netlify/plugin-nextjs).
+
+[build]
+  command = "bun run build"
+
+# Netlify's secret scanner flags any env value found in build output. The keys
+# below are PUBLIC by design, so we exclude them (their values legitimately
+# appear in the bundle):
+#   - NEXT_PUBLIC_* are inlined into the browser by Next.js on purpose.
+#   - RAZORPAY_KEY_ID is the public Razorpay key shown in Checkout (the secret is
+#     RAZORPAY_KEY_SECRET, which is NOT listed here and stays scanned/protected).
+# Real secrets (RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET, WIX_API_KEY,
+# RESEND_API_KEY) are intentionally omitted from this list so they remain guarded.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_WIX_CLIENT_ID,NEXT_PUBLIC_RAZORPAY_KEY_ID,RAZORPAY_KEY_ID,WIX_SITE_ID,NEXT_PUBLIC_TAWK_PROPERTY_ID,NEXT_PUBLIC_TAWK_WIDGET_ID"
