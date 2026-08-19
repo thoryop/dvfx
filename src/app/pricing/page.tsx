@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/pricing",
 });
 
-export const revalidate = 1800;
+export const revalidate = 120;
 
 export default async function PricingPage() {
   const faqs = await getGlobalFaqs();

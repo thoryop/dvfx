@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/portfolio",
 });
 
-export const revalidate = 1800;
+export const revalidate = 120;
 
 export default async function PortfolioPage() {
   const items = await getPortfolio();

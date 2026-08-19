@@ -45,6 +45,8 @@ const skills = [
   "VFX compositing",
 ];
 
+export const revalidate = 120;
+
 export default function AboutPage() {
   return (
     <>

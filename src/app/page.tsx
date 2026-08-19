@@ -18,7 +18,7 @@ import { FinalCta } from "@/components/sections/final-cta";
 import { PricingTeaser } from "@/components/sections/pricing-teaser";
 
 // ISR: refresh CMS-backed content periodically (and self-heal transient fetches).
-export const revalidate = 1800;
+export const revalidate = 120;
 
 export default async function HomePage() {
   const [settings, featured, testimonials, faqs] = await Promise.all([

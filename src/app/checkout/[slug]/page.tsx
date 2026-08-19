@@ -13,7 +13,7 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHeader } from "@/components/common/page-header";
 import { PackagePicker } from "@/components/checkout/package-picker";
 
-export const revalidate = 3600;
+export const revalidate = 120;
 
 export async function generateStaticParams() {
   const slugs = await getServiceSlugs();

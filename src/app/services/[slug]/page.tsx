@@ -30,7 +30,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Badge } from "@/components/ui/badge";
 
 // Pre-render all service pages at build; revalidate periodically (ISR).
-export const revalidate = 3600;
+export const revalidate = 120;
 
 export async function generateStaticParams() {
   const slugs = await getServiceSlugs();

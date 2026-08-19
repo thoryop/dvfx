@@ -20,6 +20,8 @@ export const metadata: Metadata = buildMetadata({
   path: "/contact",
 });
 
+export const revalidate = 120;
+
 export default async function ContactPage() {
   const settings = await getSiteSettings();
   const wa = whatsappLink(settings.whatsapp, "Hi! I'd like to discuss a video edit.");
