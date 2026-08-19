@@ -4,12 +4,14 @@
   command = "bun run build"
 
 # Netlify's secret scanner flags any env value found in build output. The keys
-# below are PUBLIC by design, so we exclude them (their values legitimately
-# appear in the bundle):
+# below are PUBLIC / non-sensitive by design, so we exclude them (their values
+# legitimately appear in the bundle):
 #   - NEXT_PUBLIC_* are inlined into the browser by Next.js on purpose.
-#   - RAZORPAY_KEY_ID is the public Razorpay key shown in Checkout (the secret is
-#     RAZORPAY_KEY_SECRET, which is NOT listed here and stays scanned/protected).
+#   - RAZORPAY_KEY_ID is the public Razorpay key shown in Checkout.
+#   - EDITOR_EMAIL / EMAIL_FROM are plain email addresses (the contact email is
+#     even shown publicly in the footer/contact page).
+#   - WIX_SITE_ID is a non-secret identifier.
 # Real secrets (RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET, WIX_API_KEY,
-# RESEND_API_KEY) are intentionally omitted from this list so they remain guarded.
+# RESEND_API_KEY) are intentionally NOT listed here, so they remain scanned/guarded.
 [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_WIX_CLIENT_ID,NEXT_PUBLIC_RAZORPAY_KEY_ID,RAZORPAY_KEY_ID,WIX_SITE_ID,NEXT_PUBLIC_TAWK_PROPERTY_ID,NEXT_PUBLIC_TAWK_WIDGET_ID"
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_WIX_CLIENT_ID,NEXT_PUBLIC_RAZORPAY_KEY_ID,RAZORPAY_KEY_ID,WIX_SITE_ID,EDITOR_EMAIL,EMAIL_FROM,NEXT_PUBLIC_TAWK_PROPERTY_ID,NEXT_PUBLIC_TAWK_WIDGET_ID"
