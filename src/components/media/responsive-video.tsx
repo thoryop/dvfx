@@ -11,7 +11,8 @@ import type { Orientation } from "@/types";
 
 interface ResponsiveVideoProps {
   orientation: Orientation;
-  poster: string;
+  /** Cover image. If empty, a frame is auto-derived from the video (YouTube-style). */
+  poster?: string;
   src?: string;
   title?: string;
   className?: string;
@@ -21,9 +22,12 @@ interface ResponsiveVideoProps {
 }
 
 /**
- * Aspect-aware video container. Renders the poster as a fast LCP-friendly image;
- * the actual <video> is only created after the user hits play (lazy, zero cost
- * to initial load). Works for 16:9 / 9:16 / 1:1 / 4:5 via `aspectClass`.
+ * Aspect-aware video container.
+ * - With a `poster`: renders it as a fast, LCP-friendly image and lazy-loads the
+ *   <video> only on play.
+ * - Without a `poster`: shows a still frame pulled from the video itself (seeks
+ *   ~1s in, metadata-only), so portfolio items never need a manual thumbnail.
+ * Works for 16:9 / 9:16 / 1:1 / 4:5 via `aspectClass`.
  */
 export function ResponsiveVideo({
   orientation,
@@ -36,6 +40,7 @@ export function ResponsiveVideo({
 }: ResponsiveVideoProps) {
   const [playing, setPlaying] = React.useState(false);
   const portrait = orientation === "9:16" || orientation === "4:5";
+  const hasPoster = Boolean(poster);
 
   return (
     <div
@@ -50,21 +55,42 @@ export function ResponsiveVideo({
         <video
           className="absolute inset-0 size-full object-cover"
           src={src}
-          poster={poster}
+          poster={poster || undefined}
           controls
           autoPlay
           playsInline
         />
       ) : (
         <>
-          <Image
-            src={poster}
-            alt={title ?? "Video preview"}
-            fill
-            priority={priority}
-            sizes={portrait ? "(max-width: 768px) 80vw, 420px" : "(max-width: 768px) 100vw, 800px"}
-            className="object-cover"
-          />
+          {hasPoster ? (
+            <Image
+              src={poster as string}
+              alt={title ?? "Video preview"}
+              fill
+              priority={priority}
+              sizes={portrait ? "(max-width: 768px) 80vw, 420px" : "(max-width: 768px) 100vw, 800px"}
+              className="object-cover"
+            />
+          ) : src ? (
+            // No cover image: derive a thumbnail frame from the video itself.
+            <video
+              className="absolute inset-0 size-full object-cover"
+              src={src}
+              muted
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              onLoadedMetadata={(e) => {
+                const v = e.currentTarget;
+                try {
+                  v.currentTime = Math.min(1, (v.duration || 2) / 2);
+                } catch {
+                  /* seeking not supported — first frame stays */
+                }
+              }}
+            />
+          ) : null}
+
           {src ? (
             <button
               type="button"

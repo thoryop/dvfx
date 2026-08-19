@@ -83,7 +83,15 @@ export async function POST(request: Request) {
       prefill: { name: customer.name, email: customer.email, contact: customer.phone },
     });
   } catch (err) {
-    console.error("[razorpay/order] create failed", err);
+    // Surface Razorpay's actual reason in server logs (e.g. auth failure) while
+    // keeping the client response generic.
+    const e = err as { statusCode?: number; error?: { code?: string; description?: string } };
+    console.error(
+      "[razorpay/order] create failed:",
+      e?.statusCode,
+      e?.error?.code,
+      e?.error?.description ?? err
+    );
     return NextResponse.json({ error: "Could not create order" }, { status: 502 });
   }
 }
