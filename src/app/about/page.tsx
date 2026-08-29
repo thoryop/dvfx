@@ -10,10 +10,8 @@ import {
 import type { IconSvgElement } from "@hugeicons/react";
 
 import { buildMetadata } from "@/lib/seo";
-import { stats } from "@/lib/data/source";
 import { PageHeader } from "@/components/common/page-header";
 import { SectionHeading } from "@/components/common/section-heading";
-import { Stats } from "@/components/sections/stats";
 import { Process } from "@/components/sections/process";
 import { processSteps } from "@/lib/data/source";
 import { CTAButton } from "@/components/common/cta-button";
@@ -22,7 +20,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 export const metadata: Metadata = buildMetadata({
   title: "About",
   description:
-    "Meet the editor behind DVFX — six years crafting cinematic edits across DaVinci Resolve, Premiere Pro, After Effects, Photoshop and AI tools.",
+    "Meet the editor behind DVFX — cinematic editing across DaVinci Resolve, Premiere Pro, After Effects, Photoshop and AI tools.",
   path: "/about",
 });
 
@@ -66,9 +64,9 @@ export default function AboutPage() {
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
           <p>
-            For over six years I&apos;ve lived in the timeline — cutting travel
-            films at 3am, syncing music videos to the beat, and shaving seconds
-            off retention curves for creators chasing their next milestone.
+            I live in the timeline — cutting travel films, syncing music videos
+            to the beat, and shaving seconds off retention curves for creators
+            chasing their next milestone.
           </p>
           <p>
             My approach is simple: <span className="text-foreground">story first, craft always</span>.
@@ -82,8 +80,6 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-
-      <Stats stats={stats} />
 
       {/* Skills */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

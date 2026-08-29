@@ -93,7 +93,10 @@ export async function getRelatedServices(slugs: string[]): Promise<Service[]> {
     .filter((s): s is Service => Boolean(s));
 }
 
-// Non-CMS marketing constants always come from local config.
-export const stats = mock.stats;
-export const brands = mock.brands;
+/** Brand names for the "trusted by" marquee — CMS-controlled (empty = hidden). */
+export async function getBrands(): Promise<string[]> {
+  return useMock ? mock.brands : wix.getBrands();
+}
+
+// Process steps are a fixed, non-CMS workflow explainer.
 export const processSteps = mock.processSteps;

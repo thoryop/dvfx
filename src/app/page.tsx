@@ -1,16 +1,14 @@
 import {
+  getBrands,
   getFeaturedServices,
   getGlobalFaqs,
   getSiteSettings,
   getTestimonials,
-  brands,
   processSteps,
-  stats,
 } from "@/lib/data/source";
 import { Hero } from "@/components/sections/hero";
 import { BrandMarquee } from "@/components/sections/brand-marquee";
 import { FeaturedServices } from "@/components/sections/featured-services";
-import { Stats } from "@/components/sections/stats";
 import { Process } from "@/components/sections/process";
 import { Testimonials } from "@/components/sections/testimonials";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
@@ -21,22 +19,22 @@ import { PricingTeaser } from "@/components/sections/pricing-teaser";
 export const revalidate = 120;
 
 export default async function HomePage() {
-  const [settings, featured, testimonials, faqs] = await Promise.all([
+  const [settings, featured, testimonials, faqs, brands] = await Promise.all([
     getSiteSettings(),
     getFeaturedServices(),
     getTestimonials(),
     getGlobalFaqs(),
+    getBrands(),
   ]);
 
   return (
     <>
       <Hero showreel={settings.heroVideo} poster={featured[0]?.heroImage ?? ""} />
-      <BrandMarquee brands={brands} />
+      {brands.length > 0 ? <BrandMarquee brands={brands} /> : null}
       <FeaturedServices services={featured} />
       <PricingTeaser />
-      <Stats stats={stats} />
       <Process steps={processSteps} />
-      <Testimonials testimonials={testimonials} />
+      {testimonials.length > 0 ? <Testimonials testimonials={testimonials} /> : null}
       <FaqAccordion faqs={faqs} />
       <FinalCta />
     </>

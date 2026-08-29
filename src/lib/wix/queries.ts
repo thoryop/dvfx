@@ -32,6 +32,7 @@ const COLLECTIONS = {
   faqs: "FAQs",
   addons: "Addons",
   siteSettings: "SiteSettings",
+  brands: "Brands",
 } as const;
 
 /**
@@ -270,6 +271,12 @@ export async function getGlobalFaqs(): Promise<Faq[]> {
   // Filter in JS: avoids any reference-field "isEmpty" quirk and the dataset is tiny.
   const items = await find(COLLECTIONS.faqs, (q) => q.ascending("order"));
   return items.map(mapFaq).filter((f) => !f.serviceSlug);
+}
+
+/** Brand names for the "trusted by" marquee (empty until the client adds any). */
+export async function getBrands(): Promise<string[]> {
+  const items = await find(COLLECTIONS.brands, (q) => q.ascending("order"));
+  return items.map((i) => str(i.title)).filter(Boolean);
 }
 
 export async function getRelatedServices(slugs: string[]): Promise<Service[]> {
