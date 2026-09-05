@@ -12,7 +12,7 @@ export const siteConfig = {
   description:
     "Travel films, short-form, music videos, color grading, motion graphics and more. Cinematic editing with fast turnaround, crafted by a professional video editor.",
   tagline: "Edits that make people stop scrolling.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://dvfx.example.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://dvfx.in",
   locale: "en_IN",
   ogImage: "/opengraph-image",
   keywords: [

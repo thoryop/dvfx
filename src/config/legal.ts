@@ -21,7 +21,7 @@ export interface LegalDoc {
   sections: LegalSection[];
 }
 
-const contact = `Questions? Email ${siteConfig.name} at hello@dvfx.studio.`;
+const contact = `Questions? Email ${siteConfig.name} at info@dvfx.in.`;
 
 export const termsDoc: LegalDoc = {
   slug: "terms",
@@ -138,7 +138,10 @@ export const refundDoc: LegalDoc = {
         "Approved refunds are returned to your original payment method via Razorpay, typically within 5–7 business days after approval.",
       ],
     },
-    { heading: "Contact", body: [`To request a cancellation or refund, ${contact.toLowerCase()}`] },
+    {
+      heading: "Contact",
+      body: [`To request a cancellation or refund, ${contact.toLowerCase()}`],
+    },
   ],
 };
 

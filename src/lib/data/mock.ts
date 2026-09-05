@@ -21,7 +21,7 @@ const SAMPLE_VIDEO =
 
 export const siteSettings: SiteSettings = {
   logo: "/logo.png",
-  email: "hello@dvfx.studio",
+  email: "info@dvfx.in",
   phone: "+91 98765 43210",
   whatsapp: "919876543210",
   heroVideo: SAMPLE_VIDEO,
@@ -52,7 +52,12 @@ export const services: Service[] = [
     deliveryDays: 5,
     revisions: 3,
     videoOrientation: "16:9",
-    gallery: [img("travel-g1"), img("travel-g2"), img("travel-g3"), img("travel-g4")],
+    gallery: [
+      img("travel-g1"),
+      img("travel-g2"),
+      img("travel-g3"),
+      img("travel-g4"),
+    ],
     demoVideo: SAMPLE_VIDEO,
     features: [
       "Story-driven edit",
@@ -89,7 +94,11 @@ export const services: Service[] = [
     deliveryDays: 2,
     revisions: 2,
     videoOrientation: "9:16",
-    gallery: [img("short-g1", 600, 800), img("short-g2", 600, 800), img("short-g3", 600, 800)],
+    gallery: [
+      img("short-g1", 600, 800),
+      img("short-g2", 600, 800),
+      img("short-g3", 600, 800),
+    ],
     demoVideo: SAMPLE_VIDEO,
     features: [
       "Hook-first structure",
@@ -104,7 +113,11 @@ export const services: Service[] = [
     ],
     faqIds: ["faq-files", "faq-turnaround"],
     testimonialIds: ["t-2", "t-5"],
-    relatedSlugs: ["social-media-content", "youtube-editing", "travel-video-editing"],
+    relatedSlugs: [
+      "social-media-content",
+      "youtube-editing",
+      "travel-video-editing",
+    ],
   },
   {
     id: "svc-music",
@@ -195,7 +208,11 @@ export const services: Service[] = [
     addons: [{ title: "Custom LUT pack", price: 2000 }],
     faqIds: ["faq-files", "faq-turnaround"],
     testimonialIds: ["t-4"],
-    relatedSlugs: ["travel-video-editing", "music-video-editing", "youtube-editing"],
+    relatedSlugs: [
+      "travel-video-editing",
+      "music-video-editing",
+      "youtube-editing",
+    ],
   },
   {
     id: "svc-motion",
@@ -274,7 +291,11 @@ export const services: Service[] = [
     deliveryDays: 6,
     revisions: 2,
     videoOrientation: "1:1",
-    gallery: [img("social-g1", 800, 800), img("social-g2", 800, 800), img("social-g3", 800, 800)],
+    gallery: [
+      img("social-g1", 800, 800),
+      img("social-g2", 800, 800),
+      img("social-g3", 800, 800),
+    ],
     demoVideo: SAMPLE_VIDEO,
     features: [
       "Multi-format exports",
@@ -313,14 +334,15 @@ export const services: Service[] = [
     addons: [],
     faqIds: ["faq-turnaround", "faq-revisions"],
     testimonialIds: ["t-1", "t-3"],
-    relatedSlugs: ["travel-video-editing", "music-video-editing", "youtube-editing"],
+    relatedSlugs: [
+      "travel-video-editing",
+      "music-video-editing",
+      "youtube-editing",
+    ],
   },
 ];
 
-const tiered = (
-  serviceSlug: string,
-  base: number
-): Package[] => [
+const tiered = (serviceSlug: string, base: number): Package[] => [
   {
     id: `${serviceSlug}-starter`,
     title: "Starter",
@@ -329,7 +351,12 @@ const tiered = (
     price: base,
     deliveryDays: 5,
     revisions: 1,
-    features: ["Up to 1 min edit", "1 revision", "HD 1080p export", "Basic color"],
+    features: [
+      "Up to 1 min edit",
+      "1 revision",
+      "HD 1080p export",
+      "Basic color",
+    ],
     recommended: false,
   },
   {
@@ -375,34 +402,207 @@ export const packages: Package[] = services
   .flatMap((s) => tiered(s.slug, s.basePrice));
 
 export const portfolioItems: PortfolioItem[] = [
-  { id: "p1", title: "Himalayan Escape", category: "travel", orientation: "16:9", coverImage: img("p1", 1280, 720), video: SAMPLE_VIDEO, clientName: "Wander Co.", featured: true },
-  { id: "p2", title: "Neon Nights Reel", category: "short-form", orientation: "9:16", coverImage: img("p2", 720, 1280), video: SAMPLE_VIDEO, clientName: "Glow", featured: true },
-  { id: "p3", title: "Echoes — Official MV", category: "music-video", orientation: "16:9", coverImage: img("p3", 1280, 720), video: SAMPLE_VIDEO, clientName: "Aria", featured: true },
-  { id: "p4", title: "Brand Loop", category: "social-media", orientation: "1:1", coverImage: img("p4", 1000, 1000), video: SAMPLE_VIDEO, clientName: "Nimbus", featured: false },
-  { id: "p5", title: "Dream Sequence", category: "ai-visuals", orientation: "16:9", coverImage: img("p5", 1280, 720), video: SAMPLE_VIDEO, clientName: "Synth", featured: true },
-  { id: "p6", title: "Tech Review Cut", category: "youtube", orientation: "16:9", coverImage: img("p6", 1280, 720), video: SAMPLE_VIDEO, clientName: "GearLab", featured: false },
-  { id: "p7", title: "Product Drop", category: "short-form", orientation: "4:5", coverImage: img("p7", 1000, 1250), video: SAMPLE_VIDEO, clientName: "Kicks", featured: false },
-  { id: "p8", title: "Cinematic Grade Reel", category: "color-grading", orientation: "16:9", coverImage: img("p8", 1280, 720), video: SAMPLE_VIDEO, clientName: "Studio 9", featured: true },
-  { id: "p9", title: "Logo Sting Pack", category: "motion-graphics", orientation: "1:1", coverImage: img("p9", 1000, 1000), video: SAMPLE_VIDEO, clientName: "Forge", featured: false },
-  { id: "p10", title: "Coastline Diaries", category: "travel", orientation: "9:16", coverImage: img("p10", 720, 1280), video: SAMPLE_VIDEO, clientName: "Roam", featured: false },
-  { id: "p11", title: "Festival Aftermovie", category: "music-video", orientation: "16:9", coverImage: img("p11", 1280, 720), video: SAMPLE_VIDEO, clientName: "Pulse", featured: false },
-  { id: "p12", title: "Daily Vlog Series", category: "youtube", orientation: "16:9", coverImage: img("p12", 1280, 720), video: SAMPLE_VIDEO, clientName: "Maya", featured: false },
+  {
+    id: "p1",
+    title: "Himalayan Escape",
+    category: "travel",
+    orientation: "16:9",
+    coverImage: img("p1", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Wander Co.",
+    featured: true,
+  },
+  {
+    id: "p2",
+    title: "Neon Nights Reel",
+    category: "short-form",
+    orientation: "9:16",
+    coverImage: img("p2", 720, 1280),
+    video: SAMPLE_VIDEO,
+    clientName: "Glow",
+    featured: true,
+  },
+  {
+    id: "p3",
+    title: "Echoes — Official MV",
+    category: "music-video",
+    orientation: "16:9",
+    coverImage: img("p3", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Aria",
+    featured: true,
+  },
+  {
+    id: "p4",
+    title: "Brand Loop",
+    category: "social-media",
+    orientation: "1:1",
+    coverImage: img("p4", 1000, 1000),
+    video: SAMPLE_VIDEO,
+    clientName: "Nimbus",
+    featured: false,
+  },
+  {
+    id: "p5",
+    title: "Dream Sequence",
+    category: "ai-visuals",
+    orientation: "16:9",
+    coverImage: img("p5", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Synth",
+    featured: true,
+  },
+  {
+    id: "p6",
+    title: "Tech Review Cut",
+    category: "youtube",
+    orientation: "16:9",
+    coverImage: img("p6", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "GearLab",
+    featured: false,
+  },
+  {
+    id: "p7",
+    title: "Product Drop",
+    category: "short-form",
+    orientation: "4:5",
+    coverImage: img("p7", 1000, 1250),
+    video: SAMPLE_VIDEO,
+    clientName: "Kicks",
+    featured: false,
+  },
+  {
+    id: "p8",
+    title: "Cinematic Grade Reel",
+    category: "color-grading",
+    orientation: "16:9",
+    coverImage: img("p8", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Studio 9",
+    featured: true,
+  },
+  {
+    id: "p9",
+    title: "Logo Sting Pack",
+    category: "motion-graphics",
+    orientation: "1:1",
+    coverImage: img("p9", 1000, 1000),
+    video: SAMPLE_VIDEO,
+    clientName: "Forge",
+    featured: false,
+  },
+  {
+    id: "p10",
+    title: "Coastline Diaries",
+    category: "travel",
+    orientation: "9:16",
+    coverImage: img("p10", 720, 1280),
+    video: SAMPLE_VIDEO,
+    clientName: "Roam",
+    featured: false,
+  },
+  {
+    id: "p11",
+    title: "Festival Aftermovie",
+    category: "music-video",
+    orientation: "16:9",
+    coverImage: img("p11", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Pulse",
+    featured: false,
+  },
+  {
+    id: "p12",
+    title: "Daily Vlog Series",
+    category: "youtube",
+    orientation: "16:9",
+    coverImage: img("p12", 1280, 720),
+    video: SAMPLE_VIDEO,
+    clientName: "Maya",
+    featured: false,
+  },
 ];
 
 export const testimonials: Testimonial[] = [
-  { id: "t-1", name: "Rahul Mehta", role: "Travel Creator", avatar: img("av1", 200, 200), review: "DVFX turned my messy GoPro clips into a film I'm genuinely proud of. The pacing and grade are next level.", rating: 5 },
-  { id: "t-2", name: "Sneha Kapoor", role: "YouTuber, 480K subs", avatar: img("av2", 200, 200), review: "My retention went up noticeably after switching editors. Fast, communicative and the captions are perfect.", rating: 5 },
-  { id: "t-3", name: "Arjun Nair", role: "Independent Artist", avatar: img("av3", 200, 200), review: "Beat-synced edits that actually feel the music. The music video exceeded what I had in my head.", rating: 5 },
-  { id: "t-4", name: "Priya Sharma", role: "Brand Manager, Nimbus", avatar: img("av4", 200, 200), review: "Reliable, on-brand and always on time. Our social engagement has clearly improved.", rating: 5 },
-  { id: "t-5", name: "Karan Patel", role: "Startup Founder", avatar: img("av5", 200, 200), review: "From explainer motion graphics to reels, everything was cohesive and premium. Highly recommend.", rating: 5 },
+  {
+    id: "t-1",
+    name: "Rahul Mehta",
+    role: "Travel Creator",
+    avatar: img("av1", 200, 200),
+    review:
+      "DVFX turned my messy GoPro clips into a film I'm genuinely proud of. The pacing and grade are next level.",
+    rating: 5,
+  },
+  {
+    id: "t-2",
+    name: "Sneha Kapoor",
+    role: "YouTuber, 480K subs",
+    avatar: img("av2", 200, 200),
+    review:
+      "My retention went up noticeably after switching editors. Fast, communicative and the captions are perfect.",
+    rating: 5,
+  },
+  {
+    id: "t-3",
+    name: "Arjun Nair",
+    role: "Independent Artist",
+    avatar: img("av3", 200, 200),
+    review:
+      "Beat-synced edits that actually feel the music. The music video exceeded what I had in my head.",
+    rating: 5,
+  },
+  {
+    id: "t-4",
+    name: "Priya Sharma",
+    role: "Brand Manager, Nimbus",
+    avatar: img("av4", 200, 200),
+    review:
+      "Reliable, on-brand and always on time. Our social engagement has clearly improved.",
+    rating: 5,
+  },
+  {
+    id: "t-5",
+    name: "Karan Patel",
+    role: "Startup Founder",
+    avatar: img("av5", 200, 200),
+    review:
+      "From explainer motion graphics to reels, everything was cohesive and premium. Highly recommend.",
+    rating: 5,
+  },
 ];
 
 export const faqs: Faq[] = [
-  { id: "faq-files", question: "How do I send my footage?", answer: "Share a Google Drive, Dropbox or WeTransfer link with your raw files, references and any music. I'll confirm scope before starting." },
-  { id: "faq-revisions", question: "How do revisions work?", answer: "Each package includes a set number of revision rounds. Send timestamped notes and I'll turn them around quickly. Extra rounds can be added anytime." },
-  { id: "faq-turnaround", question: "What's the typical turnaround?", answer: "Most projects deliver in 2–7 days depending on length and complexity. Priority delivery is available on Premium and as an add-on." },
-  { id: "faq-music", question: "Do you provide music?", answer: "I'll guide you to royalty-free or licensed tracks that fit your edit, or work with music you provide. Licensing remains your responsibility." },
-  { id: "faq-payment", question: "How does payment work?", answer: "Fixed packages are paid securely online via Razorpay. Custom projects get a tailored quote and an invoice/payment link once scope is agreed." },
+  {
+    id: "faq-files",
+    question: "How do I send my footage?",
+    answer:
+      "Share a Google Drive, Dropbox or WeTransfer link with your raw files, references and any music. I'll confirm scope before starting.",
+  },
+  {
+    id: "faq-revisions",
+    question: "How do revisions work?",
+    answer:
+      "Each package includes a set number of revision rounds. Send timestamped notes and I'll turn them around quickly. Extra rounds can be added anytime.",
+  },
+  {
+    id: "faq-turnaround",
+    question: "What's the typical turnaround?",
+    answer:
+      "Most projects deliver in 2–7 days depending on length and complexity. Priority delivery is available on Premium and as an add-on.",
+  },
+  {
+    id: "faq-music",
+    question: "Do you provide music?",
+    answer:
+      "I'll guide you to royalty-free or licensed tracks that fit your edit, or work with music you provide. Licensing remains your responsibility.",
+  },
+  {
+    id: "faq-payment",
+    question: "How does payment work?",
+    answer:
+      "Fixed packages are paid securely online via Razorpay. Custom projects get a tailored quote and an invoice/payment link once scope is agreed.",
+  },
 ];
 
 /** Lightweight stats for the Home stats section. */
@@ -415,13 +615,42 @@ export const stats = [
 
 /** Brands marquee. */
 export const brands = [
-  "Wander Co.", "Glow", "Aria Music", "Nimbus", "Synth", "GearLab", "Kicks", "Studio 9", "Forge", "Pulse",
+  "Wander Co.",
+  "Glow",
+  "Aria Music",
+  "Nimbus",
+  "Synth",
+  "GearLab",
+  "Kicks",
+  "Studio 9",
+  "Forge",
+  "Pulse",
 ];
 
 /** Process steps for the Home process section. */
 export const processSteps = [
-  { step: "01", title: "Brief & Footage", description: "You share your raw footage, references and goals. We align on the vision." },
-  { step: "02", title: "First Cut", description: "I build the structure, pacing and story, then send a watermarked preview." },
-  { step: "03", title: "Polish & Grade", description: "Color grade, sound design, graphics and your revision notes applied." },
-  { step: "04", title: "Delivery", description: "Final files in the formats you need — ready to publish everywhere." },
+  {
+    step: "01",
+    title: "Brief & Footage",
+    description:
+      "You share your raw footage, references and goals. We align on the vision.",
+  },
+  {
+    step: "02",
+    title: "First Cut",
+    description:
+      "I build the structure, pacing and story, then send a watermarked preview.",
+  },
+  {
+    step: "03",
+    title: "Polish & Grade",
+    description:
+      "Color grade, sound design, graphics and your revision notes applied.",
+  },
+  {
+    step: "04",
+    title: "Delivery",
+    description:
+      "Final files in the formats you need — ready to publish everywhere.",
+  },
 ];

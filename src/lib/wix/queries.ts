@@ -43,7 +43,9 @@ const COLLECTIONS = {
  */
 async function find(
   collectionId: string,
-  build?: (q: ReturnType<ReturnType<typeof getWixClient>["items"]["query"]>) => unknown
+  build?: (
+    q: ReturnType<ReturnType<typeof getWixClient>["items"]["query"]>,
+  ) => unknown,
 ): Promise<Item[]> {
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
@@ -72,14 +74,14 @@ function mapService(item: Item): Service {
     slug: str(item.slug),
     shortDescription: str(item.shortDescription),
     longDescription: str(item.longDescription),
-    category: (str(item.category, "custom") as ServiceCategory),
+    category: str(item.category, "custom") as ServiceCategory,
     thumbnail: toImageUrl(item.thumbnail),
     heroImage: toImageUrl(item.heroImage),
     featured: bool(item.featured),
     basePrice: num(item.basePrice),
     deliveryDays: num(item.deliveryDays),
     revisions: num(item.revisions),
-    videoOrientation: (str(item.videoOrientation, "16:9") as Orientation),
+    videoOrientation: str(item.videoOrientation, "16:9") as Orientation,
     gallery: toGalleryUrls(item.gallery),
     demoVideo: toVideoUrl(item.demoVideo),
     features: arr(item.features),
@@ -114,8 +116,8 @@ function mapPortfolio(item: Item): PortfolioItem {
   return {
     id: str(item._id),
     title: str(item.title),
-    category: (str(item.category, "custom") as ServiceCategory),
-    orientation: (str(item.orientation, "16:9") as Orientation),
+    category: str(item.category, "custom") as ServiceCategory,
+    orientation: str(item.orientation, "16:9") as Orientation,
     coverImage: toImageUrl(item.coverImage),
     video: toVideoUrl(item.video),
     clientName: str(item.clientName) || undefined,
@@ -160,7 +162,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     str(href) ? [{ label, icon, href: str(href) }] : [];
   return {
     logo: toImageUrl(s.logo) || "/logo.png",
-    email: str(s.email, "hello@dvfx.studio"),
+    email: str(s.email, "info@dvfx.in"),
     phone: str(s.phone),
     whatsapp: str(s.whatsapp),
     heroVideo: toVideoUrl(s.heroVideo),
@@ -181,7 +183,7 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getFeaturedServices(): Promise<Service[]> {
   const items = await find(COLLECTIONS.services, (q) =>
-    q.eq("featured", true).ascending("order")
+    q.eq("featured", true).ascending("order"),
   );
   return items.map(mapService);
 }
@@ -198,15 +200,21 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
   const service = mapService(raw);
 
   const [addons, faqItems, testimonialItems, related] = await Promise.all([
-    find(COLLECTIONS.addons, (q) => q.eq("service", service.id).ascending("order")),
-    find(COLLECTIONS.faqs, (q) => q.eq("service", service.id).ascending("order")),
+    find(COLLECTIONS.addons, (q) =>
+      q.eq("service", service.id).ascending("order"),
+    ),
+    find(COLLECTIONS.faqs, (q) =>
+      q.eq("service", service.id).ascending("order"),
+    ),
     find(COLLECTIONS.testimonials, (q) => q.eq("service", service.id)),
     find(COLLECTIONS.services, (q) => q.eq("category", service.category)),
   ]);
 
   service.addons = addons.map(mapAddon);
   service.faqIds = faqItems.map((i) => str(i._id)).filter(Boolean);
-  service.testimonialIds = testimonialItems.map((i) => str(i._id)).filter(Boolean);
+  service.testimonialIds = testimonialItems
+    .map((i) => str(i._id))
+    .filter(Boolean);
   service.relatedSlugs = related
     .map((i) => str(i.slug))
     .filter((s) => s && s !== slug)
@@ -229,7 +237,7 @@ export async function getPackagesForService(slug: string): Promise<Package[]> {
   const svc = (await find(COLLECTIONS.services, (q) => q.eq("slug", slug)))[0];
   if (!svc) return [];
   const items = await find(COLLECTIONS.packages, (q) =>
-    q.eq("service", str(svc._id)).ascending("order")
+    q.eq("service", str(svc._id)).ascending("order"),
   );
   return items.map((p) => mapPackage(p, slug));
 }
@@ -248,9 +256,13 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   return items.map(mapTestimonial);
 }
 
-export async function getTestimonialsByIds(ids: string[]): Promise<Testimonial[]> {
+export async function getTestimonialsByIds(
+  ids: string[],
+): Promise<Testimonial[]> {
   if (ids.length === 0) return [];
-  const items = await find(COLLECTIONS.testimonials, (q) => q.hasSome("_id", ids));
+  const items = await find(COLLECTIONS.testimonials, (q) =>
+    q.hasSome("_id", ids),
+  );
   return items.map(mapTestimonial);
 }
 
@@ -262,7 +274,7 @@ export async function getFaqs(): Promise<Faq[]> {
 export async function getFaqsByIds(ids: string[]): Promise<Faq[]> {
   if (ids.length === 0) return [];
   const items = await find(COLLECTIONS.faqs, (q) =>
-    q.hasSome("_id", ids).ascending("order")
+    q.hasSome("_id", ids).ascending("order"),
   );
   return items.map(mapFaq);
 }
@@ -281,7 +293,9 @@ export async function getBrands(): Promise<string[]> {
 
 export async function getRelatedServices(slugs: string[]): Promise<Service[]> {
   if (slugs.length === 0) return [];
-  const items = await find(COLLECTIONS.services, (q) => q.hasSome("slug", slugs));
+  const items = await find(COLLECTIONS.services, (q) =>
+    q.hasSome("slug", slugs),
+  );
   // preserve requested order
   const bySlug = new Map(items.map((i) => [str(i.slug), i]));
   return slugs
